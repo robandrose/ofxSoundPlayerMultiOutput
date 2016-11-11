@@ -1,5 +1,8 @@
 ofxSoundPlayerMultiOutput
 =========================
+
+## Upgraded for OF Version 0.9.3
+
 Addon for Openframeworks to play sounds on selected speakers on a given soundcard. It uses an implementation of `ofSoundPlayer` with Fmod.
 
 You can select an output with the function 

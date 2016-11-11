@@ -1,8 +1,6 @@
 #pragma once
 
 #include "ofConstants.h"
-
-
 #include "ofBaseSoundPlayer.h"
 
 
@@ -43,9 +41,10 @@ class ofxSoundPlayerMultiOutput : public ofBaseSoundPlayer {
 	public:
 
 		ofxSoundPlayerMultiOutput();
+        virtual ~ofxSoundPlayerMultiOutput(){};
 
-		bool loadSound(string fileName, bool stream = false);
-		void unloadSound();
+		bool load(string fileName, bool stream = false);
+		void unload();
 		void play();
 		void playTo(int speaker);
 		void playTo(int speaker0, int speaker1);
@@ -61,14 +60,16 @@ class ofxSoundPlayerMultiOutput : public ofBaseSoundPlayer {
 		void setPosition(float pct); // 0 = start, 1 = end;
 		void setPositionMS(int ms);
 
-		float getPosition();
-		int getPositionMS();
-		bool getIsPlaying();
-		float getSpeed();
-		float getPan();
-		float getVolume();
-		bool isLoaded();
+		float getPosition()const;
+		int getPositionMS()const;
+		bool isPlaying()const;
+		float getSpeed()const;
+		float getPan()const;
+		float getVolume()const;
+		bool isLoaded()const;
 
+    
+    
 		static void initializeFmod();
 		static void closeFmod();
 
@@ -86,5 +87,10 @@ class ofxSoundPlayerMultiOutput : public ofBaseSoundPlayer {
 		FMOD_RESULT result;
 		FMOD_CHANNEL * channel;
 		FMOD_SOUND * sound;
+    
 };
+
+
+
+
 

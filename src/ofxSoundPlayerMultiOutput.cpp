@@ -290,7 +290,7 @@ void ofxSoundPlayerMultiOutput::closeFmod()
 }
 
 //------------------------------------------------------------
-bool ofxSoundPlayerMultiOutput::loadSound(string fileName, bool stream)
+bool ofxSoundPlayerMultiOutput::load(string fileName, bool stream)
 {
 
     fileName = ofToDataPath(fileName);
@@ -312,7 +312,7 @@ bool ofxSoundPlayerMultiOutput::loadSound(string fileName, bool stream)
     // & prevent user-created memory leaks
     // if they call "loadSound" repeatedly, for example
 
-    unloadSound();
+    unload();
 
     // [3] load sound
 
@@ -338,7 +338,7 @@ bool ofxSoundPlayerMultiOutput::loadSound(string fileName, bool stream)
 }
 
 //------------------------------------------------------------
-void ofxSoundPlayerMultiOutput::unloadSound()
+void ofxSoundPlayerMultiOutput::unload()
 {
     if (bLoadedOk)
     {
@@ -349,7 +349,7 @@ void ofxSoundPlayerMultiOutput::unloadSound()
 }
 
 //------------------------------------------------------------
-bool ofxSoundPlayerMultiOutput::getIsPlaying()
+bool ofxSoundPlayerMultiOutput::isPlaying()const
 {
 
     if (!bLoadedOk) return false;
@@ -360,33 +360,32 @@ bool ofxSoundPlayerMultiOutput::getIsPlaying()
 }
 
 //------------------------------------------------------------
-float ofxSoundPlayerMultiOutput::getSpeed()
+float ofxSoundPlayerMultiOutput::getSpeed()const
 {
     return speed;
 }
 
 //------------------------------------------------------------
-float ofxSoundPlayerMultiOutput::getPan()
+float ofxSoundPlayerMultiOutput::getPan()const
 {
     return pan;
 }
 
 //------------------------------------------------------------
-float ofxSoundPlayerMultiOutput::getVolume()
+float ofxSoundPlayerMultiOutput::getVolume()const
 {
     return volume;
 }
 
 //------------------------------------------------------------
-bool ofxSoundPlayerMultiOutput::isLoaded()
-{
+bool ofxSoundPlayerMultiOutput::isLoaded()const{
     return bLoadedOk;
 }
 
 //------------------------------------------------------------
 void ofxSoundPlayerMultiOutput::setVolume(float vol)
 {
-    if (getIsPlaying() == true)
+    if (isPlaying() == true)
     {
         FMOD_Channel_SetVolume(channel, vol);
     }
@@ -396,7 +395,7 @@ void ofxSoundPlayerMultiOutput::setVolume(float vol)
 //------------------------------------------------------------
 void ofxSoundPlayerMultiOutput::setPosition(float pct)
 {
-    if (getIsPlaying() == true)
+    if (isPlaying() == true)
     {
         int sampleToBeAt = (int)(length * pct);
         FMOD_Channel_SetPosition(channel, sampleToBeAt, FMOD_TIMEUNIT_PCM);
@@ -405,16 +404,16 @@ void ofxSoundPlayerMultiOutput::setPosition(float pct)
 
 void ofxSoundPlayerMultiOutput::setPositionMS(int ms)
 {
-    if (getIsPlaying() == true)
+    if (isPlaying() == true)
     {
         FMOD_Channel_SetPosition(channel, ms, FMOD_TIMEUNIT_MS);
     }
 }
 
 //------------------------------------------------------------
-float ofxSoundPlayerMultiOutput::getPosition()
+float ofxSoundPlayerMultiOutput::getPosition()const
 {
-    if (getIsPlaying() == true)
+    if (isPlaying() == true)
     {
         unsigned int sampleImAt;
 
@@ -434,9 +433,9 @@ float ofxSoundPlayerMultiOutput::getPosition()
 }
 
 //------------------------------------------------------------
-int ofxSoundPlayerMultiOutput::getPositionMS()
+int ofxSoundPlayerMultiOutput::getPositionMS()const
 {
-    if (getIsPlaying() == true)
+    if (isPlaying() == true)
     {
         unsigned int sampleImAt;
 
@@ -455,7 +454,7 @@ void ofxSoundPlayerMultiOutput::setPan(float p)
 {
     pan = p;
     p = ofClamp(p, -1, 1);
-    if (getIsPlaying() == true)
+    if (isPlaying() == true)
     {
         FMOD_Channel_SetPan(channel,p);
     }
@@ -465,7 +464,7 @@ void ofxSoundPlayerMultiOutput::setPan(float p)
 //------------------------------------------------------------
 void ofxSoundPlayerMultiOutput::setPaused(bool bP)
 {
-    if (getIsPlaying() == true)
+    if (isPlaying() == true)
     {
         FMOD_Channel_SetPaused(channel,bP);
         bPaused = bP;
@@ -476,7 +475,7 @@ void ofxSoundPlayerMultiOutput::setPaused(bool bP)
 //------------------------------------------------------------
 void ofxSoundPlayerMultiOutput::setSpeed(float spd)
 {
-    if (getIsPlaying() == true)
+    if (isPlaying() == true)
     {
         FMOD_Channel_SetFrequency(channel, internalFreq * spd);
     }
@@ -487,7 +486,7 @@ void ofxSoundPlayerMultiOutput::setSpeed(float spd)
 //------------------------------------------------------------
 void ofxSoundPlayerMultiOutput::setLoop(bool bLp)
 {
-    if (getIsPlaying() == true)
+    if (isPlaying() == true)
     {
         FMOD_Channel_SetMode(channel,  (bLp == true) ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF);
     }

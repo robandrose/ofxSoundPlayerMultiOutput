@@ -7,8 +7,8 @@ void ofApp::setup(){
 	   ofFmodSelectDriver(0);
 	
 	   // Load sound
-	   soundPlayer.loadSound("1085.mp3", true);
-	   soundPlayer.setLoop(true);
+	 //  soundPlayer.loadSound("1085.mp3", true);
+	  // soundPlayer.setLoop(true);
 
 	   // Play it to speaker 0 and speaker 1
 	   //soundPlayer.playTo(0,1);
@@ -18,7 +18,7 @@ void ofApp::setup(){
 	   //soundPlayer.playTo(speakers,4);
 
 	   // Play it to speaker 1
-	   soundPlayer.playTo(1);
+	   //soundPlayer.playTo(1);
 }
 
 //--------------------------------------------------------------
